@@ -44,7 +44,7 @@ namespace Free_key_vnhax
             chromeDriver.Url = "https://vnhax.com/client-side/pubg/active?action=get";
             chromeDriver.Navigate();
             IJavaScriptExecutor js = chromeDriver as IJavaScriptExecutor;
-            var dataFromJS = (string)js.ExecuteScript("var content = document.getElementsByClassName('container')[1].children[0].innerText;return content;");
+            var dataFromJS = (string)js.ExecuteScript("var content = document.getElementsByClassName('container')[1].children[0].innerText;var txt = content.substring(content.indexOf(\":\")+2);return txt;");
             string _key = dataFromJS.Replace("Mã kích hoạt của bạn là:", "").Replace("Kích hoạt thành công !", "").Trim();
             MessageBox.Show("Key đã lấy thành công, đã copy key vào bộ nhớ tạm!");
             chromeDriver.Quit();
