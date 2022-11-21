@@ -121,10 +121,13 @@ version: "1.0"
             chromeDriver.Navigate();
             IJavaScriptExecutor js = chromeDriver as IJavaScriptExecutor;
             var dataFromJS = (string)js.ExecuteScript("var content = document.getElementsByClassName('container')[1].children[0].innerText;var txt = content.substring(content.indexOf(\":\")+2);return txt;");
-            Console.WriteLine(dataFromJS);
-            Console.ReadKey();
             string _key = dataFromJS.Trim();
-            MessageBox.Show("Key đã lấy thành công, đã copy key vào bộ nhớ tạm!");
+            Console.WriteLine(_key);
+            if (_key.Length != 0)
+            {
+                Console.Beep(400, 400);
+                MessageBox.Show("Key đã lấy thành công, đã copy key vào bộ nhớ tạm!");
+            }
             chromeDriver.Quit();
             Process.Start(new ProcessStartInfo
             {
@@ -133,7 +136,6 @@ version: "1.0"
                 CreateNoWindow = true,
                 UseShellExecute = false
             }).WaitForExit();
-            Console.Beep(400, 400);
             Clipboard.SetText(_key);
         }
     }
